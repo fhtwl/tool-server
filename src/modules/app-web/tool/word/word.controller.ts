@@ -21,7 +21,11 @@ export class AppToolWordController {
   })
   @Post('/remove-watermark')
   @ApiConsumes('multipart/form-data')
-  @UseInterceptors(FileInterceptor('file'))
+  @UseInterceptors(FileInterceptor('file', {
+    limits: {
+      fileSize: 40 * 1024 * 1024, // 40MB
+    }
+  }))
   @ApiRes(UploadedFileRes)
   @Public()
   async removeWatermark(
