@@ -48,5 +48,5 @@ export async function removeUltimateWatermark(file: Express.Multer.File) {
     // fs.writeFileSync(fullPath, zip.generate({ type: 'nodebuffer' }));
 
   fs.writeFileSync(fullPath, new Uint8Array(out));
-  return fullPath;
+  return `${dirPrefix}/${fileName}`;
 }
