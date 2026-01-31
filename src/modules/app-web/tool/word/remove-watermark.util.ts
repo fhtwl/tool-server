@@ -40,13 +40,19 @@ export async function removeUltimateWatermark(file: Express.Multer.File) {
     docx.remove('word/theme/theme1.xml');
   }
 
-  const out = await docx.generateAsync({ type: 'nodebuffer' }) as Buffer;
+  const out = await  docx.generateAsync({
+    type: 'nodebuffer',
+    compression: 'DEFLATE',
+    compressionOptions: {
+      level: 9 // 最大压缩
+    }
+  }) as Buffer;
   const { dirPath, dirPrefix } = configuration().upload;
   const fileName = `${uuid()}.docx`;
   const fullPath = path.join(`${dirPath}${dirPrefix}`, fileName);
 
     // fs.writeFileSync(fullPath, zip.generate({ type: 'nodebuffer' }));
 
-  fs.writeFileSync(fullPath, new Uint8Array(out));
+  fs.writeFileSync(fullPath, new Uint8Array(out)); // 生成文件  
   return `${dirPrefix}/${fileName}`;
 }

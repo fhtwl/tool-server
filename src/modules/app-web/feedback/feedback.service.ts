@@ -88,8 +88,9 @@ export class AppFeedbackService {
   }
 
   async create(user: AddFeedbackDto) {
-    return this.repository.create({
+    const feedback = this.repository.create({
       ...user,
     });
+    return this.repository.save(feedback);
   }
 }

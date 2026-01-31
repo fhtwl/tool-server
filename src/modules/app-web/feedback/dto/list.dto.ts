@@ -5,7 +5,7 @@ import { IsInt, ValidateNested } from 'class-validator';
 
 class FeedbackListDtoParams {
   @ApiProperty({ required: false })
-  title: string;
+  contact: string;
 }
 
 export class FeedbackListDto {

@@ -7,6 +7,7 @@ import { ApiTags } from '@nestjs/swagger';
 import { ApiRes, ApiResType } from 'src/common/decorator/api-res.decorator';
 import { FeedbackQueryDto } from './dto/query.dto';
 import { FeedbackModel } from './feedback.model';
+import { Public } from 'src/common/decorator/public.decorator';
 
 @ApiTags('意见反馈模块')
 @Controller('app/feedback')
@@ -15,6 +16,7 @@ export class AppFeedbackController {
 
   @Post('/list')
   @ApiRes(FeedbackModel, ApiResType.PAGE_ARRAY)
+  @Public()
   async findAll(@Body() params: FeedbackListDto) {
     return {
       data: await this.service.findAll(params),
@@ -39,6 +41,7 @@ export class AppFeedbackController {
 
   @Post('/add')
   @ApiRes()
+  @Public()
   async add(@Body() user: AddFeedbackDto) {
     return {
       data: await this.service.create(user),

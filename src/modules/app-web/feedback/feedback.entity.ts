@@ -13,8 +13,8 @@ export class Feedback {
   id: number;
 
   @ApiProperty({ description: '联系方式' })
-  @Column()
-  title: string;
+  @Column({ nullable: true })
+  contact?: string;
 
   @ApiProperty({ description: '内容' })
   @Column()
